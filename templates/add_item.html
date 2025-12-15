@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Animate.css -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <title>Додати товар</title>
+  </head>
+
+  <body class="bg-[#5d8dd9] text-white min-h-screen">
+
+    <!-- Header -->
+    <header
+      class="flex items-center justify-between p-4 bg-white text-black shadow-md animate__animated animate__fadeInDown"
+    >
+      <a href="/" class="text-2xl font-bold">TechShop</a>
+
+      <nav class="flex gap-4">
+        <a class="bg-black text-white rounded-xl px-4 py-2 hover:bg-gray-800" href="/">
+          Головна
+        </a>
+        <a class="bg-black text-white rounded-xl px-4 py-2 hover:bg-gray-800" href="/catalog">
+          Каталог
+        </a>
+        <a class="bg-black text-white rounded-xl px-4 py-2 hover:bg-gray-800" href="/login">
+          Увійти
+        </a>
+      </nav>
+    </header>
+
+    <main class="p-6">
+
+      <div
+        class="bg-white text-black p-8 rounded-xl shadow-xl max-w-xl mx-auto mt-10 animate__animated animate__fadeInUp"
+      >
+        <h1 class="text-3xl font-bold mb-6 text-center">Додати новий товар</h1>
+
+        <form method="POST" action="/add_item" class="grid gap-4">
+
+          <!-- Назва товару -->
+          <input
+            name="title"
+            type="text"
+            placeholder="Назва товару"
+            required
+            class="p-3 border rounded-md"
+          />
+
+          <!-- Опис товару -->
+          <input
+            name="description"
+            type="text"
+            placeholder="Опис товару"
+            required
+            class="p-3 border rounded-md"
+          />
+
+          <!-- Ціна -->
+          <input
+            name="price"
+            type="number"
+            placeholder="Ціна"
+            required
+            class="p-3 border rounded-md"
+          />
+
+          <!-- Категорія -->
+          <label class="font-semibold">Оберіть категорію:</label>
+          <select name="category" id="category" class="p-3 border rounded-md" required>
+            <option value="">Виберіть категорію</option>
+            <option value="Смартфон">Смартфон</option>
+            <option value="Ноутбук">Ноутбук</option>
+            <option value="Холодильник">Холодильник</option>
+          </select>
+
+          <!-- Кнопка додати товар -->
+          <button
+            type="submit"
+            class="bg-black text-white py-3 rounded-xl hover:bg-gray-800"
+          >
+            Додати товар
+          </button>
+        </form>
+
+        <a
+          href="/catalog"
+          class="block text-center mt-6 text-blue-600 hover:underline"
+        >
+          ← Назад до каталогу
+        </a>
+      </div>
+
+    </main>
+
+    <!-- Скрипт для автоматичної підстановки зображення -->
+    <script>
+      const form = document.querySelector("form");
+      form.addEventListener("submit", (e) => {
+        const category = document.getElementById("category").value;
+        let image_url = "";
+
+        switch(category) {
+          case "Смартфон":
+            image_url = "/src/smartphone.png";
+            break;
+          case "Ноутбук":
+            image_url = "/src/laptop.png";
+            break;
+          case "Холодильник":
+            image_url = "/src/fridge.png";
+            break;
+        }
+
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = "image_url";
+        input.value = image_url;
+        form.appendChild(input);
+      });
+    </script>
+
+  </body>
+</html>
