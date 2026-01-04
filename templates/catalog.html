@@ -61,17 +61,23 @@
 
         {% for item in catalog %}
         <div class="bg-white text-black p-5 rounded-xl shadow-xl animate__animated animate__zoomIn flex flex-col">
-          <img src="{{ item['image_url'] }}" alt="{{ item['title'] }}" class="w-full h-100 object-cover rounded-lg mb-4" />
+          <img src="{{ item['image_url'] }}" alt="{{ item['title'] }}" class="w-full h-80 object-cover rounded-lg mb-4" />
 
           <h3 class="text-xl font-bold">{{ item['title'] }}</h3>
           <p class="mt-2">{{ item['description'] }}</p>
           <p class="mt-2"><b>Ціна:</b> {{ item['price'] }} грн</p>
-          <p><b>Категорія:</b> {{ item['category'] }}</p>
+          <p class="mb-4"><b>Категорія:</b> {{ item['category'] }}</p>
+
+          <button
+          type="button"
+          class="w-full bg-green-500 text-white py-2 rounded-xl hover:bg-green-600 transition cursor-pointer mb-3"
+        >
+          🛒 Купити
+          </button>
 
           <form
             action="{{ url_for('delete_item', item_id=item['id']) }}"
             method="post"
-            class="mt-4"
           >
             <button
               type="submit"
@@ -94,4 +100,5 @@
     </main>
   </body>
 </html>
+
 
