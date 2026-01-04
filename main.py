@@ -82,5 +82,16 @@ def sort_by_price():
 def not_found(error):
     return render_template("error.html"), 404
 
+@app.route("/delete_item/<int:item_id>", methods=["POST"])
+def delete_item(item_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM products WHERE id = ?", (item_id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for("catalog"))
+
+
 if __name__ == "__main__":
     app.run(debug=True)
+
